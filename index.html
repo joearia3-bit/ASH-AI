@@ -2,111 +2,353 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="ARIA SME HUB - AI-Powered Opportunities for Papua New Guineans">
-  <title>ARIA SME HUB</title>
-  <link rel="stylesheet" href="style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="description" content="ASH AI - Turn what you have into income">
+  <title>ASH AI v1</title>
+  <style>
+    * { box-sizing: border-box; }
+
+    html, body {
+      margin: 0;
+      min-height: 100%;
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+      color: #111827;
+    }
+
+    body {
+      min-height: 100vh;
+      background:
+        radial-gradient(circle at 92% 6%, rgba(255, 222, 60, 0.95) 0, rgba(255, 222, 60, 0.0) 130px),
+        linear-gradient(180deg, #bfeafc 0%, #7fd3f7 22%, #4dc3d6 52%, #2fb4a1 76%, #1c9a6a 100%);
+      background-attachment: fixed;
+      padding: 16px 14px 40px;
+    }
+
+    .wrap {
+      max-width: 520px;
+      margin: 0 auto;
+    }
+
+    /* ---------- Header ---------- */
+    .top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 10px;
+    }
+
+    .logo {
+      display: inline-block;
+      background: #0b0b0b;
+      color: #ffffff;
+      font-weight: 900;
+      font-size: 30px;
+      letter-spacing: 1px;
+      padding: 8px 22px 10px;
+      border-radius: 14px;
+      box-shadow: 0 5px 0 #000, 0 8px 14px rgba(0, 0, 0, 0.25);
+    }
+    .logo span { color: #ffc91f; }
+
+    .badge {
+      background: #22a84a;
+      color: #ffffff;
+      font-weight: 700;
+      font-size: 14px;
+      padding: 6px 14px;
+      border-radius: 999px;
+      box-shadow: 0 4px 0 #14722f;
+      margin-top: 8px;
+    }
+
+    .headline {
+      color: #ffffff;
+      font-size: 26px;
+      font-weight: 800;
+      line-height: 1.2;
+      margin: 8px 0 6px;
+      text-shadow: 0 2px 4px rgba(0, 60, 90, 0.35);
+    }
+
+    .subline {
+      color: #0b1f2a;
+      font-size: 16px;
+      margin: 0 0 16px;
+      font-weight: 500;
+    }
+
+    /* ---------- Cards ---------- */
+    .card {
+      background: #ffffff;
+      border-radius: 18px;
+      padding: 16px;
+      margin-bottom: 18px;
+      box-shadow: 0 4px 0 rgba(0, 60, 90, 0.18), 0 10px 22px rgba(0, 40, 60, 0.18);
+    }
+
+    .card-title {
+      font-size: 17px;
+      font-weight: 700;
+      margin: 0 0 12px;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    /* ---------- Colourful 3D buttons ---------- */
+    .tile {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      min-height: 108px;
+      border: none;
+      border-radius: 14px;
+      cursor: pointer;
+      font: inherit;
+      font-weight: 800;
+      font-size: 16px;
+      padding: 10px;
+      transition: transform 0.05s ease;
+    }
+    .tile:active { transform: translateY(3px); }
+
+    .tile .emoji { font-size: 34px; line-height: 1; }
+
+    .tile-blue   { background: linear-gradient(180deg, #46c7f7, #0e8fd8); color: #ffffff; box-shadow: 0 6px 0 #0a6aa3; }
+    .tile-red    { background: linear-gradient(180deg, #f35656, #c92424); color: #ffffff; box-shadow: 0 6px 0 #8e1515; }
+    .tile-gold   { background: linear-gradient(180deg, #ffd43b, #e3a300); color: #111111; box-shadow: 0 6px 0 #9c6e00; }
+    .tile-green  { background: linear-gradient(180deg, #33cc66, #178a44); color: #ffffff; box-shadow: 0 6px 0 #0e5b2c; }
+
+    .tile:focus-visible { outline: 3px solid #0b1f2a; outline-offset: 3px; }
+
+    /* ---------- Description ---------- */
+    .label-plain {
+      font-size: 17px;
+      font-weight: 700;
+      margin: 0 0 10px;
+    }
+
+    textarea {
+      width: 100%;
+      min-height: 96px;
+      resize: vertical;
+      padding: 12px;
+      font: inherit;
+      font-size: 16px;
+      color: #111827;
+      background: #f8fafc;
+      border: 2px solid #cbd5e1;
+      border-radius: 12px;
+    }
+    textarea::placeholder { color: #6b7280; }
+    textarea:focus { outline: 3px solid #0e8fd8; outline-offset: 1px; border-color: #0e8fd8; }
+
+    .cta {
+      width: 100%;
+      margin-top: 12px;
+      min-height: 56px;
+      border: none;
+      border-radius: 14px;
+      font: inherit;
+      font-size: 18px;
+      font-weight: 800;
+      cursor: pointer;
+      color: #ffffff;
+      background: #9aa3b0;
+      box-shadow: 0 6px 0 #5f6876;
+    }
+    .cta:not(:disabled) {
+      background: linear-gradient(180deg, #33cc66, #178a44);
+      box-shadow: 0 6px 0 #0e5b2c;
+    }
+    .cta:disabled { cursor: not-allowed; }
+    .cta:active:not(:disabled) { transform: translateY(3px); }
+
+    .hint {
+      font-size: 14px;
+      color: #4b5563;
+      margin: 10px 0 0;
+    }
+
+    .status {
+      margin-top: 12px;
+      padding: 12px 14px;
+      border-radius: 12px;
+      font-size: 15px;
+      font-weight: 600;
+    }
+    .status[hidden] { display: none; }
+    .status-ok   { background: #e6f6ec; color: #135c2d; border-left: 6px solid #178a44; }
+    .status-warn { background: #fdecea; color: #8e1515; border-left: 6px solid #c92424; }
+    .status-info { background: #e8f4ff; color: #0b4f86; border-left: 6px solid #0e8fd8; }
+
+    .items {
+      margin: 10px 0 0;
+      padding: 0;
+      list-style: none;
+      font-size: 15px;
+    }
+    .items li { padding: 4px 0; }
+
+    .disclaimer {
+      text-align: center;
+      font-size: 13px;
+      color: #374151;
+      margin-top: 20px;
+    }
+
+    input[type="file"] { display: none; }
+
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+      clip: rect(0 0 0 0);
+      white-space: nowrap;
+    }
+
+    @media (min-width: 600px) {
+      .headline { font-size: 30px; }
+    }
+  </style>
 </head>
 <body>
+  <div class="wrap">
 
-  <header class="app-header">
-    <h1>ARIA SME HUB</h1>
-    <p class="subtitle">AI-Powered Opportunities for Papua New Guineans</p>
-  </header>
+    <header class="top">
+      <div class="logo">ASH <span>AI</span></div>
+      <div class="badge">v1</div>
+    </header>
 
-  <main class="container">
+    <h1 class="headline">Turn what you have into income</h1>
+    <p class="subline">Show us your items. We'll describe them and list practical ways to earn from them.</p>
 
-    <!-- HOME SCREEN -->
-    <section id="screen-home" class="screen active" aria-label="Home">
-      <div class="hero">
-        <h2>Turn What You Have Into Opportunity</h2>
-        <p class="tagline">Discover. Create. Connect. Grow.</p>
-        <p class="intro">Use ARIA to explore business ideas, identify opportunities, discover markets and turn what you have into potential income.</p>
-      </div>
-
-      <nav class="menu-grid" aria-label="Main menu">
-        <button type="button" class="feature-box" data-action="scan">
-          <span class="icon" aria-hidden="true">📷</span>
-          <span class="label">SCAN WITH ARIA</span>
+    <!-- Step 1 -->
+    <section class="card" aria-labelledby="step1">
+      <h2 class="card-title" id="step1">1. Add what you have</h2>
+      <div class="grid-2">
+        <button type="button" class="tile tile-blue" id="btn-photo">
+          <span class="emoji" aria-hidden="true">📷</span>
+          <span>Take photo</span>
         </button>
-        <button type="button" class="feature-box" data-action="talk">
-          <span class="icon" aria-hidden="true">🎤</span>
-          <span class="label">TALK WITH ARIA</span>
+        <button type="button" class="tile tile-red" id="btn-video">
+          <span class="emoji" aria-hidden="true">🎥</span>
+          <span>Record video</span>
         </button>
-        <button type="button" class="feature-box" data-action="chat">
-          <span class="icon" aria-hidden="true">💬</span>
-          <span class="label">CHAT WITH ARIA</span>
+        <button type="button" class="tile tile-gold" id="btn-scan">
+          <span class="emoji" aria-hidden="true">🔍</span>
+          <span>Scan item</span>
         </button>
-        <button type="button" class="feature-box" data-action="ideas">
-          <span class="icon" aria-hidden="true">💡</span>
-          <span class="label">FIND A BUSINESS IDEA</span>
-        </button>
-        <button type="button" class="feature-box" data-action="markets">
-          <span class="icon" aria-hidden="true">🛒</span>
-          <span class="label">FIND MARKETS</span>
-        </button>
-        <button type="button" class="feature-box" data-action="support">
-          <span class="icon" aria-hidden="true">🤝</span>
-          <span class="label">FIND SUPPORT</span>
-        </button>
-      </nav>
-    </section>
-
-    <!-- SCAN WITH ARIA SUBMENU -->
-    <section id="screen-scan" class="screen" aria-label="Scan with ARIA">
-      <button type="button" class="back-btn" data-back="home">← Back to Home</button>
-      <h2 class="screen-title">📷 Scan With ARIA</h2>
-      <p class="helper">Choose how you want to add an item.</p>
-
-      <div class="scan-options">
-        <button type="button" id="take-photo-btn" class="option-btn">
-          <span class="icon" aria-hidden="true">📷</span>
-          <span class="label">TAKE PHOTO</span>
-        </button>
-        <button type="button" id="choose-image-btn" class="option-btn">
-          <span class="icon" aria-hidden="true">🖼️</span>
-          <span class="label">CHOOSE IMAGE</span>
+        <button type="button" class="tile tile-green" id="btn-describe">
+          <span class="emoji" aria-hidden="true">✍️</span>
+          <span>Describe it</span>
         </button>
       </div>
 
-      <!-- Hidden file input, triggered by the CHOOSE IMAGE button -->
-      <input type="file" id="file-input" accept="image/*" hidden>
+      <input type="file" id="input-photo" accept="image/*" capture="environment">
+      <input type="file" id="input-video" accept="video/*" capture="environment">
+      <input type="file" id="input-scan" accept="image/*">
 
-      <div id="scan-notice" class="notice" role="status" aria-live="polite" hidden></div>
-
-      <div class="preview-box">
-        <img id="image-preview" alt="Selected item preview" hidden>
-      </div>
+      <div id="items-status" class="status status-info" hidden></div>
+      <ul id="items-list" class="items"></ul>
     </section>
 
-    <!-- CHAT WITH ARIA -->
-    <section id="screen-chat" class="screen" aria-label="Chat with ARIA">
-      <button type="button" class="back-btn" data-back="home">← Back to Home</button>
-      <h2 class="screen-title">💬 Chat With ARIA</h2>
+    <!-- Step 2 -->
+    <section class="card" aria-labelledby="step2">
+      <h2 class="label-plain" id="step2">2. Describe it (optional but helpful)</h2>
+      <label for="description" class="sr-only">Describe your item</label>
+      <textarea id="description" placeholder="e.g. 2019 road bike, lightly used, new tires, small scratch on frame. Lives in a small apartment."></textarea>
 
-      <div id="chat-log" class="chat-log" role="log" aria-live="polite"></div>
+      <button type="button" class="cta" id="btn-income" disabled>Get income options</button>
+      <p class="hint" id="cta-hint">Add at least one photo, video, or a description of 10+ characters.</p>
 
-      <form id="chat-form" class="chat-form">
-        <label for="chat-input" class="sr-only">Type your message</label>
-        <input type="text" id="chat-input" placeholder="Type your message here" autocomplete="off" maxlength="500">
-        <button type="submit" class="btn-primary">SEND</button>
-        <button type="button" id="chat-clear-btn" class="btn-secondary">CLEAR</button>
-      </form>
+      <div id="result-status" class="status status-warn" hidden></div>
     </section>
 
-    <!-- PLACEHOLDER SCREEN (Talk, Ideas, Markets, Support) -->
-    <section id="screen-placeholder" class="screen" aria-label="Feature coming soon">
-      <button type="button" class="back-btn" data-back="home">← Back to Home</button>
-      <h2 class="screen-title" id="placeholder-title">Feature</h2>
-      <div id="placeholder-message" class="notice notice-info" role="status"></div>
-    </section>
+    <p class="disclaimer">The AI can make mistakes. Check important prices with local sellers. It will tell you when it is not sure.</p>
+  </div>
 
-  </main>
+  <script>
+    (function () {
+      'use strict';
 
-  <footer class="app-footer">
-    <p>ARIA SME HUB · Created by JojoAction</p>
-  </footer>
+      var MIN_DESCRIPTION = 10;
+      var items = [];
 
-  <script src="script.js"></script>
+      var $ = function (id) { return document.getElementById(id); };
+
+      var btnIncome = $('btn-income');
+      var ctaHint = $('cta-hint');
+      var description = $('description');
+      var itemsStatus = $('items-status');
+      var itemsList = $('items-list');
+      var resultStatus = $('result-status');
+
+      function showStatus(el, text, type) {
+        el.textContent = text;
+        el.className = 'status status-' + type;
+        el.hidden = false;
+      }
+
+      function refreshCta() {
+        var typed = description.value.trim().length;
+        var ready = items.length > 0 || typed >= MIN_DESCRIPTION;
+        btnIncome.disabled = !ready;
+        ctaHint.hidden = ready;
+      }
+
+      function addItem(kind, file) {
+        items.push({ kind: kind, name: file.name });
+
+        var li = document.createElement('li');
+        li.textContent = (kind === 'photo' ? '📷 Photo: ' : kind === 'video' ? '🎥 Video: ' : '🔍 Scanned: ') + file.name;
+        itemsList.appendChild(li);
+
+        showStatus(itemsStatus, 'Added. You can add more items or describe it below.', 'ok');
+        resultStatus.hidden = true;
+        refreshCta();
+      }
+
+      function wireFileInput(inputId, kind) {
+        $(inputId).addEventListener('change', function (e) {
+          var file = e.target.files && e.target.files[0];
+          if (file) addItem(kind, file);
+          e.target.value = '';
+        });
+      }
+
+      $('btn-photo').addEventListener('click', function () { $('input-photo').click(); });
+      $('btn-video').addEventListener('click', function () { $('input-video').click(); });
+      $('btn-scan').addEventListener('click', function () { $('input-scan').click(); });
+      $('btn-describe').addEventListener('click', function () {
+        description.focus();
+        description.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      });
+
+      wireFileInput('input-photo', 'photo');
+      wireFileInput('input-video', 'video');
+      wireFileInput('input-scan', 'scan');
+
+      description.addEventListener('input', refreshCta);
+
+      btnIncome.addEventListener('click', function () {
+        if (btnIncome.disabled) return;
+        showStatus(
+          resultStatus,
+          'The AI is not connected yet, so no income options can be generated. Your items are still listed above.',
+          'warn'
+        );
+      });
+
+      refreshCta();
+    })();
+  </script>
 </body>
 </html>
