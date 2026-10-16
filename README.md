@@ -1,4 +1,4 @@
-# ARIA SME HUB
+# ASH-AI
 
 **AI-Powered Opportunities for Papua New Guineans**
 
