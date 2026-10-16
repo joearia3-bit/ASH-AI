@@ -2,148 +2,110 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <meta name="description" content="ASH AI - Turn what you have into income">
-  <title>ASH AI v1</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-  <style>
-    * { box-sizing: border-box; }
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="ARIA SME HUB - AI-Powered Opportunities for Papua New Guineans">
+  <title>ARIA SME HUB</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
 
-    html, body {
-      margin: 0;
-      min-height: 100%;
-      font-family: "Poppins", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
-      color: #111827;
-    }
+  <header class="app-header">
+    <h1>ARIA SME HUB</h1>
+    <p class="subtitle">AI-Powered Opportunities for Papua New Guineans</p>
+  </header>
 
-    body {
-      min-height: 100vh;
-      position: relative;
-      overflow-x: hidden;
-      background:
-        radial-gradient(circle at 92% 6%, rgba(255, 222, 60, 0.95) 0, rgba(255, 222, 60, 0.0) 130px),
-        linear-gradient(180deg, #bfeafc 0%, #7fd3f7 22%, #4dc3d6 52%, #2fb4a1 76%, #1c9a6a 100%);
-      background-attachment: fixed;
-      padding: 16px 14px 40px;
-    }
+  <main class="container">
 
-    /* ---------- Decorative leaves ---------- */
-    .leaf {
-      position: absolute;
-      pointer-events: none;
-      z-index: 0;
-    }
-    .leaf-right {
-      top: 690px;
-      right: -30px;
-      width: 260px;
-      height: 90px;
-      opacity: 0.55;
-    }
-    .leaf-left {
-      bottom: 0;
-      left: 0;
-      width: 180px;
-      height: 290px;
-    }
+    <!-- HOME SCREEN -->
+    <section id="screen-home" class="screen active" aria-label="Home">
+      <div class="hero">
+        <h2>Turn What You Have Into Opportunity</h2>
+        <p class="tagline">Discover. Create. Connect. Grow.</p>
+        <p class="intro">Use ARIA to explore business ideas, identify opportunities, discover markets and turn what you have into potential income.</p>
+      </div>
 
-    .wrap {
-      position: relative;
-      z-index: 1;
-      max-width: 520px;
-      margin: 0 auto;
-    }
+      <nav class="menu-grid" aria-label="Main menu">
+        <button type="button" class="feature-box" data-action="scan">
+          <span class="icon" aria-hidden="true">📷</span>
+          <span class="label">SCAN WITH ARIA</span>
+        </button>
+        <button type="button" class="feature-box" data-action="talk">
+          <span class="icon" aria-hidden="true">🎤</span>
+          <span class="label">TALK WITH ARIA</span>
+        </button>
+        <button type="button" class="feature-box" data-action="chat">
+          <span class="icon" aria-hidden="true">💬</span>
+          <span class="label">CHAT WITH ARIA</span>
+        </button>
+        <button type="button" class="feature-box" data-action="ideas">
+          <span class="icon" aria-hidden="true">💡</span>
+          <span class="label">FIND A BUSINESS IDEA</span>
+        </button>
+        <button type="button" class="feature-box" data-action="markets">
+          <span class="icon" aria-hidden="true">🛒</span>
+          <span class="label">FIND MARKETS</span>
+        </button>
+        <button type="button" class="feature-box" data-action="support">
+          <span class="icon" aria-hidden="true">🤝</span>
+          <span class="label">FIND SUPPORT</span>
+        </button>
+      </nav>
+    </section>
 
-    /* ---------- Header ---------- */
-    .top {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      margin-bottom: 10px;
-    }
+    <!-- SCAN WITH ARIA SUBMENU -->
+    <section id="screen-scan" class="screen" aria-label="Scan with ARIA">
+      <button type="button" class="back-btn" data-back="home">← Back to Home</button>
+      <h2 class="screen-title">📷 Scan With ARIA</h2>
+      <p class="helper">Choose how you want to add an item.</p>
 
-    .logo {
-      display: inline-block;
-      background: #0b0b0b;
-      color: #ffffff;
-      font-weight: 900;
-      font-size: 30px;
-      letter-spacing: 1px;
-      padding: 8px 22px 10px;
-      border-radius: 14px;
-      box-shadow: 0 5px 0 #000, 0 8px 14px rgba(0, 0, 0, 0.25);
-    }
-    .logo span { color: #ffc91f; }
+      <div class="scan-options">
+        <button type="button" id="take-photo-btn" class="option-btn">
+          <span class="icon" aria-hidden="true">📷</span>
+          <span class="label">TAKE PHOTO</span>
+        </button>
+        <button type="button" id="choose-image-btn" class="option-btn">
+          <span class="icon" aria-hidden="true">🖼️</span>
+          <span class="label">CHOOSE IMAGE</span>
+        </button>
+      </div>
 
-    .badge {
-      background: #22a84a;
-      color: #ffffff;
-      font-weight: 700;
-      font-size: 14px;
-      padding: 6px 14px;
-      border-radius: 999px;
-      box-shadow: 0 4px 0 #14722f;
-      margin-top: 8px;
-    }
+      <input type="file" id="file-input" accept="image/*" hidden>
 
-    .headline {
-      color: #ffffff;
-      font-size: 26px;
-      font-weight: 800;
-      line-height: 1.2;
-      margin: 8px 0 6px;
-      text-shadow: 0 2px 4px rgba(0, 60, 90, 0.35);
-    }
+      <div id="scan-notice" class="notice" role="status" aria-live="polite" hidden></div>
 
-    .subline {
-      color: #0b1f2a;
-      font-size: 16px;
-      margin: 0 0 16px;
-      font-weight: 500;
-    }
+      <div class="preview-box">
+        <img id="image-preview" alt="Selected item preview" hidden>
+      </div>
+    </section>
 
-    /* ---------- Cards ---------- */
-    .card {
-      background: #ffffff;
-      border-radius: 18px;
-      padding: 16px;
-      margin-bottom: 18px;
-      box-shadow: 0 6px 0 #d3e6f2, 0 12px 24px rgba(0, 40, 60, 0.18);
-    }
+    <!-- CHAT WITH ARIA -->
+    <section id="screen-chat" class="screen" aria-label="Chat with ARIA">
+      <button type="button" class="back-btn" data-back="home">← Back to Home</button>
+      <h2 class="screen-title">💬 Chat With ARIA</h2>
 
-    .card-title {
-      font-size: 17px;
-      font-weight: 700;
-      margin: 0 0 12px;
-    }
+      <div id="chat-log" class="chat-log" role="log" aria-live="polite"></div>
 
-    .grid-2 {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-    }
+      <form id="chat-form" class="chat-form">
+        <label for="chat-input" class="sr-only">Type your message</label>
+        <input type="text" id="chat-input" placeholder="Type your message here" autocomplete="off" maxlength="500">
+        <button type="submit" class="btn-primary">SEND</button>
+        <button type="button" id="chat-clear-btn" class="btn-secondary">CLEAR</button>
+      </form>
+    </section>
 
-    /* ---------- Colourful 3D buttons ---------- */
-    .tile {
-      position: relative;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 4px;
-      min-height: 108px;
-      border: none;
-      border-radius: 14px;
-      cursor: pointer;
-      font: inherit;
-      font-weight: 800;
-      font-size: 16px;
-      padding: 10px;
-      text-align: center;
-      transition: transform 0.05s ease;
-    }
-    .tile:active { transform: translateY(3px); }
+    <!-- PLACEHOLDER SCREEN (Talk, Ideas, Markets, Support) -->
+    <section id="screen-placeholder" class="screen" aria-label="Feature coming soon">
+      <button type="button" class="back-btn" data-back="home">← Back to Home</button>
+      <h2 class="screen-title" id="placeholder-title">Feature</h2>
+      <div id="placeholder-message" class="notice notice-info" role="status"></div>
+    </section>
 
-    .tile .emoji { font-size: 34px; line-height: 1; }
+  </main>
 
-    .tile-blue   { background: linear-gradient(180deg,
+  <footer class="app-footer">
+    <p>ARIA SME HUB · Created by JojoAction</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
