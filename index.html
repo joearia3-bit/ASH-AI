@@ -309,11 +309,12 @@
       </div>
     </section>
 
-    <!-- Step 2 -->
-    <section class="card" aria-labelledby="step2">
-      <h2 class="label-plain" id="step2">2. Describe it (optional but helpful)</h2>
-      <label for="description" class="sr-only" style="position:absolute;left:-9999px;">Describe your item</label>
-      <textarea id="description" placeholder="e.g. 2019 road bike, lightly used, new tires, small scratch on frame. Lives in a small apartment."></textarea>
+    <!-- Get income options (own box, with its own text box) -->
+    <section class="card" aria-labelledby="income-title">
+      <h2 class="label-plain" id="income-title">2. What do you want to know?</h2>
+      <label for="income-question" class="sr-only" style="position:absolute;left:-9999px;">What do you want to know?</label>
+      <textarea id="income-question" placeholder="e.g. What can I do to make money from this?" maxlength="200" style="width:100%;min-height:72px;padding:12px;font:inherit;font-size:16px;color:#111827;background:#f8fafc;border:2px solid #cbd5e1;border-radius:12px;resize:vertical;"></textarea>
+      <p class="hint" style="margin-top:8px;">ASH AI answers questions about income and business ideas only.</p>
 
       <button type="button" class="cta" id="btn-income" disabled>Get income options</button>
       <p class="hint" id="cta-hint">Add at least one photo, video, or a description of 10+ characters.</p>
@@ -335,7 +336,7 @@
 
       var btnIncome = $('btn-income');
       var ctaHint = $('cta-hint');
-      var description = $('description');
+      var description = $('income-question');
       var itemsStatus = $('items-status');
       var itemsList = $('items-list');
       var resultStatus = $('result-status');
@@ -377,8 +378,8 @@
       $('btn-video').addEventListener('click', function () { $('input-video').click(); });
       $('btn-scan').addEventListener('click', function () { $('input-scan').click(); });
       $('btn-describe').addEventListener('click', function () {
-        description.focus();
-        description.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        description.scrollIntoView({ block: 'center' });
+        setTimeout(function () { description.focus(); }, 300);
       });
 
       var ARIA_MESSAGES = {
@@ -404,13 +405,47 @@
 
       description.addEventListener('input', refreshCta);
 
-      btnIncome.addEventListener('click', function () {
+      var sampleFn = null;
+      if (window.claude && typeof window.claude.use === 'function') {
+        window.claude.use('sample').then(function (s) { sampleFn = s || null; }).catch(function () { sampleFn = null; });
+      }
+
+      btnIncome.addEventListener('click', async function () {
         if (btnIncome.disabled) return;
-        showStatus(
-          resultStatus,
-          'The AI is not connected yet, so no income options can be generated. Your items are still listed above.',
-          'warn'
-        );
+
+        var typed = description.value.trim();
+        var itemNames = items.map(function (it) { return it.name; }).join(', ');
+
+        if (!sampleFn) {
+          showStatus(resultStatus, 'The AI is not available in this view. Try opening the page in the Claude app.', 'warn');
+          return;
+        }
+
+        showStatus(resultStatus, 'Thinking...', 'info');
+
+        var prompt =
+          'You are ASH AI, a helper for people in Papua New Guinea. ' +
+          'Answer the person\'s question directly and first. ' +
+          'If the question is about income or business, give up to 5 practical, low-cost ideas as a short list. ' +
+          'If it is about something else, say that this app only helps with income and business ideas, and suggest the person ask a general assistant for that. ' +
+          'Never mention images or items unless the person listed some below. ' +
+          'If you cannot give a specific link or fact, say so plainly and suggest how the person can find it. ' +
+          'Say clearly when you are not sure. Do not invent prices or links; say to check local sellers. ' +
+          '\n\nItems the person listed (file names only, the images are not shared): ' + (itemNames || 'none listed') +
+          '\nWhat they want to know: ' + (typed || 'What can I do to make money from this?');
+
+        try {
+          var result = await sampleFn(prompt, { modelTier: 'quick' });
+          var clean = (result.text || '')
+            .replace(/^#+\s*/gm, '')
+            .replace(/\*\*/g, '')
+            .replace(/\*/g, '')
+            .replace(/`/g, '');
+          resultStatus.style.whiteSpace = 'pre-line';
+          showStatus(resultStatus, clean || 'No answer came back. Please try again.', 'ok');
+        } catch (err) {
+          showStatus(resultStatus, 'The AI could not answer right now. Please try again.', 'warn');
+        }
       });
 
       refreshCta();
