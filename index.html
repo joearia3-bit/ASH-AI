@@ -32,3 +32,81 @@
         <button type="button" class="feature-box" data-action="talk">
           <span class="icon" aria-hidden="true">🎤</span>
           <span class="label">TALK WITH ARIA</span>
+        </button>
+        <button type="button" class="feature-box" data-action="chat">
+          <span class="icon" aria-hidden="true">💬</span>
+          <span class="label">CHAT WITH ARIA</span>
+        </button>
+        <button type="button" class="feature-box" data-action="ideas">
+          <span class="icon" aria-hidden="true">💡</span>
+          <span class="label">FIND A BUSINESS IDEA</span>
+        </button>
+        <button type="button" class="feature-box" data-action="markets">
+          <span class="icon" aria-hidden="true">🛒</span>
+          <span class="label">FIND MARKETS</span>
+        </button>
+        <button type="button" class="feature-box" data-action="support">
+          <span class="icon" aria-hidden="true">🤝</span>
+          <span class="label">FIND SUPPORT</span>
+        </button>
+      </nav>
+    </section>
+
+    <!-- SCAN WITH ARIA SUBMENU -->
+    <section id="screen-scan" class="screen" aria-label="Scan with ARIA">
+      <button type="button" class="back-btn" data-back="home">← Back to Home</button>
+      <h2 class="screen-title">📷 Scan With ARIA</h2>
+      <p class="helper">Choose how you want to add an item.</p>
+
+      <div class="scan-options">
+        <button type="button" id="take-photo-btn" class="option-btn">
+          <span class="icon" aria-hidden="true">📷</span>
+          <span class="label">TAKE PHOTO</span>
+        </button>
+        <button type="button" id="choose-image-btn" class="option-btn">
+          <span class="icon" aria-hidden="true">🖼️</span>
+          <span class="label">CHOOSE IMAGE</span>
+        </button>
+      </div>
+
+      <!-- Hidden file input, triggered by the CHOOSE IMAGE button -->
+      <input type="file" id="file-input" accept="image/*" hidden>
+
+      <div id="scan-notice" class="notice" role="status" aria-live="polite" hidden></div>
+
+      <div class="preview-box">
+        <img id="image-preview" alt="Selected item preview" hidden>
+      </div>
+    </section>
+
+    <!-- CHAT WITH ARIA -->
+    <section id="screen-chat" class="screen" aria-label="Chat with ARIA">
+      <button type="button" class="back-btn" data-back="home">← Back to Home</button>
+      <h2 class="screen-title">💬 Chat With ARIA</h2>
+
+      <div id="chat-log" class="chat-log" role="log" aria-live="polite"></div>
+
+      <form id="chat-form" class="chat-form">
+        <label for="chat-input" class="sr-only">Type your message</label>
+        <input type="text" id="chat-input" placeholder="Type your message here" autocomplete="off" maxlength="500">
+        <button type="submit" class="btn-primary">SEND</button>
+        <button type="button" id="chat-clear-btn" class="btn-secondary">CLEAR</button>
+      </form>
+    </section>
+
+    <!-- PLACEHOLDER SCREEN (Talk, Ideas, Markets, Support) -->
+    <section id="screen-placeholder" class="screen" aria-label="Feature coming soon">
+      <button type="button" class="back-btn" data-back="home">← Back to Home</button>
+      <h2 class="screen-title" id="placeholder-title">Feature</h2>
+      <div id="placeholder-message" class="notice notice-info" role="status"></div>
+    </section>
+
+  </main>
+
+  <footer class="app-footer">
+    <p>ARIA SME HUB · Created by JojoAction</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
