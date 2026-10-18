@@ -1,0 +1,7 @@
+
+<svg xmlns="http://www.w3.org/2000/svg" width="192" height="192" viewBox="0 0 192 192">
+  <rect width="192" height="192" rx="36" fill="#dff3ff"/>
+  <circle cx="96" cy="76" r="42" fill="#f2c94c"/>
+  <path d="M96 44 L104 68 L129 68 L109 83 L117 107 L96 92 L75 107 L83 83 L63 68 L88 68 Z" fill="#111111"/>
+  <text x="96" y="151" font-family="Arial,sans-serif" font-size="28" font-weight="bold" text-anchor="middle" fill="#111111">ASH AI</text>
+</svg>
